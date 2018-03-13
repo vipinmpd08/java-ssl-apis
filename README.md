@@ -16,21 +16,26 @@ keystore updated as below
 
 - [x] sign() your message and verify() it - also provided one example to sign and verify the message
 > // Let's sign our message
+
 > String signature = sign("mesigned", pair.getPrivate());
 
 > // Let's check the signature
+
 > boolean isCorrect = verify("mesigned", signature,
 		
 # AES Encryption of Streamed data
 
 View AESClientServer.java to see the usage of CipherInputStream and CipherOutputStream. Useful for bigdata encryption. 	
 > //Create Instance
+
 > AESClientServer aesClient = new AESClientServer("AES", "AES/CBC/PKCS5Padding", "abcdkdkjdsdsfdfd12432434323");
 
 > //Encrypt
+
 > aesClient.encrypt(encInFile, encOutFile);
 
 > //Decrypt
+
 > aesClient.decrypt(decInFile, decOutFile);
 
 
@@ -40,7 +45,10 @@ first step is to create a private key (self signed in this example), server is h
 To make this work, we have to import server's public key as a trustedCertEntry in the client keystore.
 
 > is = connection.getInputStream();
+
 > SSLSocketFactory sslSocketFactory = getFactory(new File(CERTIFACATE_FILE), CERTIFACATE_PASS, CERTIFACATE_ALIAS);
+
 > connection.setSSLSocketFactory(sslSocketFactory);
+
 > is = connection.getInputStream();
 
