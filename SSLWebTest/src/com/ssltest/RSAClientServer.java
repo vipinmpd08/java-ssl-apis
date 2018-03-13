@@ -36,11 +36,10 @@ public class RSAClientServer {
 
 	public static KeyPair getKeyPairFromKeyStore() throws Exception {
 		// Generated with:
-		// keytool -genkeypair -alias newbigdatatest -storepass changeit
-		// -keypass s3cr3t -keyalg RSA -keystore praveenskeystore.jks
+		// keytool -genkeypair -alias datatest -storepass changeit -keypass s3cr3t -keyalg RSA -keystore keystore.jks
 
 		InputStream ins = new FileInputStream(new File(
-				"src\\resources\\praveenskeystore.jks"));
+				"src\\resources\\keystore.jks"));
 
 		KeyStore keyStore = KeyStore.getInstance("JCEKS");
 
@@ -52,10 +51,10 @@ public class RSAClientServer {
 				"s3cr3t".toCharArray());
 
 		KeyStore.PrivateKeyEntry privateKeyEntry = (KeyStore.PrivateKeyEntry) keyStore
-				.getEntry("newbigdatatest", keyPassword);
+				.getEntry("datatest", keyPassword);
 
 		java.security.cert.Certificate cert = keyStore
-				.getCertificate("newbigdatatest");
+				.getCertificate("datatest");
 		PublicKey publicKey = cert.getPublicKey();
 		PrivateKey privateKey = privateKeyEntry.getPrivateKey();
 
@@ -123,10 +122,10 @@ public class RSAClientServer {
 		System.out.println(decipheredMessage);
 
 		// Let's sign our message
-		String signature = sign("praveensigned", pair.getPrivate());
+		String signature = sign("mesigned", pair.getPrivate());
 
 		// Let's check the signature
-		boolean isCorrect = verify("praveensigned", signature,
+		boolean isCorrect = verify("mesigned", signature,
 		pair.getPublic());
 		System.out.println("Signature correct: " + isCorrect);
 
